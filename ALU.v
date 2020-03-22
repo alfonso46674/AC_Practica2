@@ -25,9 +25,12 @@ module ALU
 	output reg Zero,
 	output reg [31:0]ALUResult
 );
-
+localparam AND = 4'b0000;
+localparam OR 	= 4'b00001;
+localparam NOR = 4'b0010;
 localparam ADD = 4'b0011;
 localparam SUB = 4'b0100;
+
    
    always @ (A or B or ALUOperation)
      begin
@@ -36,7 +39,13 @@ localparam SUB = 4'b0100;
 			ALUResult=A + B;
 		  SUB: // sub
 			ALUResult=A - B;
-
+		  AND: // and
+			ALUResult = A & B;
+		  OR: // or
+			ALUResult = A | B;
+		  NOR: 	//nor
+			ALUResult = ~(A|B);
+		  
 		default:
 			ALUResult= 0;
 		endcase // case(control)
