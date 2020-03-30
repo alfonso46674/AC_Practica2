@@ -23,15 +23,15 @@
 	andi $t2, $t1, 6 # debe de dar 4
 	
 	#lui
-	
+	lui $t3, 8
 	#nor
 	nor $t2, $t1, $t0 # debe de dar fffffff8
 	
 	#sll
-	sll $t2, $t1, 2 # debe de dar 4
+	sll $t2, $t1, 2 # debe de dar 20
 	
 	#srl
-	srl $t2, $t1, 2 # debe de dar 2
+	srl $t2, $t1, 2 # debe de dar 1
 	
 	#lw
 	

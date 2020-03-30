@@ -56,7 +56,7 @@ localparam LUI = 4'b0101;
 		  SLL: //Recorrer n bits a la izquierda
 			ALUResult = B << shamt;
 		  LUI: // lui
-			ALUResult = {B[15:0],16'b0000000000000000}
+			ALUResult = {B[15:0],16'b0000000000000000};
 		default:
 			ALUResult= 0;
 		endcase // case(control)
