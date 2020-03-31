@@ -26,13 +26,16 @@ module DataMemory
 	reg [DATA_WIDTH-1:0] ram[MEMORY_DEPTH-1:0];
 	wire [DATA_WIDTH-1:0] ReadDataAux;
 	
+	wire [DATA_WIDTH-1:0] TempAddress;
+	assign TempAddress = (Address-32'h10010000)/4;
+	
 	always @ (posedge clk)
 	begin
 		// Write
 		if (MemWrite)
-			ram[Address] <= WriteData;
+			ram[TempAddress] <= WriteData;
 	end
-	assign ReadDataAux = ram[Address];
+	assign ReadDataAux = ram[TempAddress];//ram[Address];
   	assign ReadData = {DATA_WIDTH{MemRead}}& ReadDataAux;
 
 endmodule
