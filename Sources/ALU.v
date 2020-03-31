@@ -63,4 +63,3 @@ localparam LUI = 4'b0101;
 		Zero = (ALUResult==0) ? 1'b1 : 1'b0;
      end // always @ (A or B or control)
 endmodule 
-// alu//

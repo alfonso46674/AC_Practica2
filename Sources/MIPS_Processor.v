@@ -210,44 +210,26 @@ assign ALUResultOut = ALUResult_wire;
 //******************************************************************/
 //******************************************************************/
 
-//memoria ram
-DataMemory
-#(
-	.DATA_WIDTH(32),
-	.MEMORY_DEPTH(256)
-)
-RamMemory
-(
-	.WriteData(ReadData2_wire),
-	.Address(ALUResult_wire),
-	.MemWrite(wMemWrite),
-	.MemRead(wMemRead),
-	.clk(clk),
-	.ReadData(wReadData)
-);
-
-
-//mux para diferenciar entre alu y memoria
+ //multiplexor para decidir si saltar o no a la direccion propuesta dependiendo si se comple el selector o no
 Multiplexer2to1
 #(
 	.NBits(32)
 )
-MUX_ALUandRAM
+MUX_Branch
 (
-	.Selector(wMemtoReg),
-	.MUX_Data0(ALUResult_wire),
-	.MUX_Data1(wReadData),
-	
-	.MUX_Output(MUX_RamALU_wire)
+	.Selector(BranchEQ_wire & zero_wire | BranchNE_wire & ~zero_wire), //condicion si se cumple el beq o el bne
+	.MUX_Data0(PC_4_wire),
+	.MUX_Data1(ALUResult_adder_wire),
+	.MUX_Output(BranchNE_PC_wire)
 );
+
+
+//multiplexor usado para saber si va a ser jump o no
 
 Multiplexer2to1
 #(
 	 .NBits(32)
 )
-
-
-//multiplexor usado para saber si va a ser jump o no
 MUX_JUMP
 (
 	.Selector(jump_wire),
@@ -256,6 +238,14 @@ MUX_JUMP
 	.MUX_Output(branch_or_jump_wire)
 );
 
+
+Adder32bits
+ADD_ALU_RESULT
+(
+	.Data0(PC_4_wire),
+	.Data1(inmmediate_shifted_wire),
+	.Result((ALUResult_adder_wire))
+);
 
 ShiftLeft2
 ShiftLeft
@@ -285,30 +275,6 @@ ShiftLeftBranch
 	.DataOutput(inmmediate_shifted_wire)
 	
 );
-
-Adder32bits
-ADD_ALU_RESULT
-(
-	.Data0(PC_4_wire),
-	.Data1(inmmediate_shifted_wire),
-	.Result((ALUResult_adder_wire))
-);
-
-
-
- //multiplexor para decidir si saltar o no a la direccion propuesta dependiendo si se comple el selector o no
-Multiplexer2to1
-#(
-	.NBits(32)
-)
-MUX_Branch
-(
-	.Selector(BranchEQ_wire & zero_wire | BranchNE_wire & ~zero_wire), //condicion si se cumple el beq o el bne
-	.MUX_Data0(PC_4_wire),
-	.MUX_Data1(ALUResult_adder_wire),
-	.MUX_Output(BranchNE_PC_wire)
-);
-
 
 
 // este mux salta a la direccion del registro deseado siempre y cuando se
@@ -353,6 +319,39 @@ MUX_JAL_wRITE_RA
 	.MUX_Data1(PC_4_wire),
 	
 	.MUX_Output(writeData_wire)
+);
+
+
+//memoria ram
+DataMemory
+#(
+	.DATA_WIDTH(32),
+	.MEMORY_DEPTH(256)
+)
+RamMemory
+(
+	.WriteData(ReadData2_wire),
+	.Address(ALUResult_wire),
+	.MemWrite(wMemWrite),
+	.MemRead(wMemRead),
+	.clk(clk),
+	.ReadData(wReadData)
+);
+
+
+
+//mux para diferenciar entre alu y memoria
+Multiplexer2to1
+#(
+	.NBits(32)
+)
+MUX_ALUandRAM
+(
+	.Selector(wMemtoReg),
+	.MUX_Data0(ALUResult_wire),
+	.MUX_Data1(wReadData),
+	
+	.MUX_Output(MUX_RamALU_wire)
 );
 
 endmodule

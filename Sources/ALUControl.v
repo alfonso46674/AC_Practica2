@@ -76,4 +76,3 @@ end
 assign ALUOperation = ALUControlValues;
 
 endmodule
-//alucontrol//
