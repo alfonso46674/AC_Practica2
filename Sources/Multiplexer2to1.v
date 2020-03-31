@@ -31,4 +31,3 @@ module Multiplexer2to1
 	end
 
 endmodule
-//mux21//

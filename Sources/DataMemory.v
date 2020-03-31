@@ -12,7 +12,7 @@
 
 module DataMemory 
 #(	parameter DATA_WIDTH=32,
-	parameter MEMORY_DEPTH = 256 // 256 palabras, 32 bits cada uno de 4
+	parameter MEMORY_DEPTH = 256 //256 palabras de 32x4
 
 )
 (
@@ -25,7 +25,7 @@ module DataMemory
 	// Declare the RAM variable
 	reg [DATA_WIDTH-1:0] ram[MEMORY_DEPTH-1:0];
 	wire [DATA_WIDTH-1:0] ReadDataAux;
-
+	
 	always @ (posedge clk)
 	begin
 		// Write
@@ -36,4 +36,3 @@ module DataMemory
   	assign ReadData = {DATA_WIDTH{MemRead}}& ReadDataAux;
 
 endmodule
-//datamemory//

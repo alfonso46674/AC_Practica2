@@ -33,4 +33,3 @@ always@(negedge reset or posedge clk) begin
 end
 
 endmodule
-//pcreg//

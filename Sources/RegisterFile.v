@@ -399,7 +399,7 @@ Register_gp
 
 Register
 #(
-	.inicio(252)
+	.inicio(252)	
 )
 Register_sp
 (
@@ -527,4 +527,3 @@ MUXRegister2
 	.MUX_Output(ReadData2)
 );
 endmodule
-//regfile//

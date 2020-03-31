@@ -37,6 +37,9 @@ localparam I_Type_BEQ	 = 9'b011_xxxxxx;
 localparam I_Type_BNE	 = 9'b011_xxxxxx;
 localparam I_Type_LUI	 = 9'b001_xxxxxx;
 
+localparam I_Type_SW		 = 9'b010_xxxxxx;
+localparam I_Type_LW		 = 9'b010_xxxxxx;
+
 reg [3:0] ALUControlValues;
 wire [8:0] Selector;
 
@@ -61,6 +64,9 @@ always@(Selector)begin
 		
 		I_Type_BEQ: 	ALUControlValues = 4'b0100; //BEQ Y BNE tienen el mismo valor de control para la ALU ya que 
 		I_Type_BNE:		ALUControlValues = 4'b0100; // necesitan hacer restas para poder funcionar, por eso el codigo es igual a la resta
+		
+		I_Type_LW:		ALUControlValues = 4'b0011; //LW y SW necesitan de add para poder funcionar
+		I_Type_SW:		ALUControlValues = 4'b0011;
 		
 		default: ALUControlValues = 4'b1001;
 	endcase

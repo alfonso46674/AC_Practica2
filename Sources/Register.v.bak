@@ -11,7 +11,8 @@
 ******************************************************************/
 module Register
 #(
-	parameter N=32
+	parameter N=32,
+	parameter inicio= 0 // se agrega para tener un nuevo inicio en reset para el sp
 )
 (
 	input clk,
@@ -25,7 +26,8 @@ module Register
 
 always@(negedge reset or posedge clk) begin
 	if(reset==0)
-		DataOutput <= 0;
+		DataOutput <= inicio;
+		
 	else	
 		if(enable==1)
 			DataOutput<=DataInput;
