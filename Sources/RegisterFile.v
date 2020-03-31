@@ -398,6 +398,9 @@ Register_gp
 
 
 Register
+#(
+	.inicio(252)
+)
 Register_sp
 (
 	.clk(clk),

@@ -11,8 +11,8 @@
 ******************************************************************/
 
 module DataMemory 
-#(	parameter DATA_WIDTH=8,
-	parameter MEMORY_DEPTH = 1024
+#(	parameter DATA_WIDTH=32,
+	parameter MEMORY_DEPTH = 256 // 256 palabras, 32 bits cada uno de 4
 
 )
 (

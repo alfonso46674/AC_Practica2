@@ -29,7 +29,7 @@ module ALU
 
 //Valores provenientes de ALUControl
 localparam AND = 4'b0000;
-localparam OR 	= 4'b00001;
+localparam OR 	= 4'b0001;
 localparam NOR = 4'b0010;
 localparam ADD = 4'b0011;
 localparam SUB = 4'b0100;

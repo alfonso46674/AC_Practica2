@@ -38,9 +38,16 @@
 	#sw
 	
 	#beq
-	
+	addi $t1, $zero,2
+	beq $t1,$t0, prueba
+	addi $t3, $zero, 1
+prueba:	addi $t1, $zero,9
+
+
 	#bne
-	
+	bne $t0, $t1, prueba2
+	addi $t1, $zero, 8
+prueba2: addi $t0, $zero, 4
 	#j
 	
 	#jal

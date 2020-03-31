@@ -19,7 +19,7 @@ module ALUControl
 	output [3:0] ALUOperation
 
 );
-//Valores sacados del green sheet, tabla 3
+//Valores sacados del green sheet, tabla 3 para los tipo r
 localparam R_Type_AND    = 9'b111_100100;
 localparam R_Type_OR     = 9'b111_100101;
 localparam R_Type_NOR    = 9'b111_100111;
@@ -28,7 +28,7 @@ localparam R_Type_SUB	 = 9'b111_100010;
 localparam R_Type_SLL	 = 9'b111_000000;
 localparam R_Type_SRL	 = 9'b111_000010;
 
-
+//operaciones que se diferencian por el aluop
 localparam I_Type_ADDI   = 9'b100_xxxxxx;
 localparam I_Type_ORI    = 9'b101_xxxxxx;
 localparam I_Type_ANDI   = 9'b110_xxxxxx;
