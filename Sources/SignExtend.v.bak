@@ -19,5 +19,4 @@ module SignExtend
 
 assign  SignExtendOutput = {{16{DataInput[15]}},DataInput[15:0]};
 
-endmodule 
-// signextend//
+endmodule // signExtend

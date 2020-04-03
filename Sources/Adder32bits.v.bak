@@ -1,6 +1,6 @@
 /******************************************************************
 * Description
-*	This performs a shift left opeartion in roder to calculate the brances.
+*	This is a  an adder that can be parameterized in its bit-width.
 *	1.0
 * Author:
 *	Dr. José Luis Pizano Escalante
@@ -9,14 +9,20 @@
 * Date:
 *	01/03/2014
 ******************************************************************/
-module ShiftLeft2 
-(   
-	input [31:0]  DataInput,
-   output reg [31:0] DataOutput
 
+module Adder32bits
+#
+(
+	parameter NBits=32
+)
+(
+	input [NBits-1:0] Data0,
+	input [NBits-1:0] Data1,
+	
+	output [NBits-1:0] Result
 );
-   always @ (DataInput)
-     DataOutput = {DataInput[29:0], 1'b0, 1'b0};
 
-endmodule 
-// leftshift2//
+assign Result = Data1 + Data0;
+
+
+endmodule

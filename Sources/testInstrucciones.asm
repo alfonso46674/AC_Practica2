@@ -9,14 +9,15 @@
 	srl $t2, $t1, 2 # debe de dar 1
 	and $t2, $t1, $t0 # debe de dar 0
 	lui $t3, 8
-	
+	jal Prueba3
 	j test1
 	addi $t1, $zero, 3
 	
 test1:
-	sw $t1, 8($sp)
+	addi $sp, $zero, 0x10010000
+	sw $t1, 0($sp)
 	addi $t1, $t1, -1
-	lw $t1, 8($sp)
+	lw $t1, 0($sp)
 	jal branch
 	addi $t0, $t0, 1
 	j exit
@@ -33,6 +34,10 @@ iguales:
 	 addi $t1, $zero, 4  # no deberia de ejecutarse
 	
 regreso:
+	jr $ra
+	
+Prueba3:
+	addi $t4, $zero, 10
 	jr $ra
 	
 exit:

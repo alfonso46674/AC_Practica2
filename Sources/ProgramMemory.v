@@ -15,7 +15,7 @@
 module ProgramMemory
 #
 (
-	parameter MEMORY_DEPTH=64,
+	parameter MEMORY_DEPTH=32,
 	parameter DATA_WIDTH=32
 )
 (
@@ -31,7 +31,7 @@ assign RealAddress = {2'b0,Address[(DATA_WIDTH-1):2]};
 
 	initial
 	begin
-		$readmemh("C:/MIPSProjects/MIPSProcessor_Practica2_ver3/Sources/text.dat", rom);
+		$readmemh("C:/MIPSProjects/MIPSProcessor_Practica2_ver4/Sources/text.dat", rom);
 	end
 
 	always @ (RealAddress)
@@ -40,3 +40,4 @@ assign RealAddress = {2'b0,Address[(DATA_WIDTH-1):2]};
 	end
 
 endmodule
+//programmemory//

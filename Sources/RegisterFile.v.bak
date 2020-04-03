@@ -524,4 +524,3 @@ MUXRegister2
 	.MUX_Output(ReadData2)
 );
 endmodule
-//regfile//

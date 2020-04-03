@@ -19,8 +19,7 @@ module Control
 	output RegDst,
 	output BranchEQ,
 	output BranchNE,
-	output jal, // nuevo wire
-	output Jump, // nuevo wire 
+	output jump, // nuevo wire 
 	output jr,	//nuevo wire
 	output MemRead,
 	output MemtoReg,
@@ -51,48 +50,52 @@ reg [13:0] ControlValues;
 
 always@(OP or func) begin
 	case(OP)
-		R_Type: 
+		R_Type:      
 				case(func) 
 				6'h8: //si el func es la instruccion jr
-					ControlValues = 14'b0_000_00_00_001_000; // se prende wire jr
+					ControlValues = 13'b0_000_00_00_01_000; // se prende wire jr
 				default
-					ControlValues = 14'b1_001_00_00_000_111; 
+					ControlValues = 13'b1_001_00_00_00_111; 
 				endcase
 				
 		
-		I_Type_ADDI:		ControlValues = 14'b0_101_00_00_000_100;
-		I_Type_ORI:			ControlValues = 14'b0_101_00_00_000_101;
-		I_Type_ANDI:		ControlValues = 14'b0_101_00_00_000_110;
-		I_Type_LUI:			ControlValues = 14'b0_101_00_00_000_001;
-		I_Type_LW:			ControlValues = 14'b0_111_10_00_000_100;
-		I_Type_SW:			ControlValues = 14'b0_100_01_00_000_100;
-		I_Type_BEQ:			ControlValues = 14'b0_000_00_10_000_011;
-		I_Type_BNE:			ControlValues = 14'b0_000_00_01_000_011;
+		I_Type_ADDI:		ControlValues = 13'b0_101_00_00_00_100;
+		I_Type_ORI:			ControlValues = 13'b0_101_00_00_00_101;
+		
+		I_Type_ANDI:		ControlValues = 13'b0_101_00_00_00_110;
+		I_Type_LUI:			ControlValues = 13'b0_101_00_00_00_001;
+		
+		I_Type_LW:			ControlValues = 13'b0_111_10_00_00_010;
+		I_Type_SW:			ControlValues = 13'b0_100_01_00_00_010;
+		
+		I_Type_BEQ:			ControlValues = 13'b0_000_00_10_00_011;
+		I_Type_BNE:			ControlValues = 13'b0_000_00_01_00_011;
 		
 			
-		
-		J_Type_J:			ControlValues = 14'b0_000_00_00_010_000; // prender wire jump
-		J_Type_JAL:			ControlValues = 14'b0_001_00_00_110_000; // prender wire jal
+		J_Type_J:			ControlValues = 13'b0_000_00_00_10_000; // prender wire jump
+		J_Type_JAL:			ControlValues = 13'b0_001_00_00_10_000; // prender wire jal
 		
 		default:
-			ControlValues= 14'b00000000000000;
+			ControlValues= 13'b00000000000000;
 		endcase
 end	
 	
 
-assign RegDst   = ControlValues[13];
-assign ALUSrc   = ControlValues[12];
-assign MemtoReg = ControlValues[11];
-assign RegWrite = ControlValues[10];
-assign MemRead  = ControlValues[9];
-assign MemWrite = ControlValues[8];
-assign BranchEQ = ControlValues[7];
-assign BranchNE = ControlValues[6];
+assign RegDst   = ControlValues[12];
+assign ALUSrc   = ControlValues[11];
+assign MemtoReg = ControlValues[10];
+assign RegWrite = ControlValues[9];
+assign MemRead  = ControlValues[8];
+assign MemWrite = ControlValues[7];
+assign BranchEQ = ControlValues[6];
+assign BranchNE = ControlValues[5];
 //wires de tipo jump
-assign jal		 = ControlValues[5];
-assign Jump		 = ControlValues[4];
+assign jump		 = ControlValues[4];
 assign jr		 = ControlValues[3];
 assign ALUOp    = ControlValues[2:0];
+
+
+
 
 endmodule
 
